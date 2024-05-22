@@ -6,62 +6,54 @@
     <title>留言板</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        .header {
-            width: 100%;
-            height: 84px;
-            background-color: #8599E1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 50px;
+            background-color: #f7f7f7;
         }
 
         .comment-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
-            margin-top: 140px; 
+            gap: 20px;
+            padding: 40px;
+            margin-top: 200px;
         }
 
         .comment-box {
-            width: 501px;
+            width: 560px;
             background-color: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-box input[type="text"], .comment-box textarea {
+            width: calc(100% - 40px);
+            margin-bottom: 20px;
             padding: 20px;
+            border: 2px solid #ccc;
             border-radius: 10px;
         }
 
-        #name {
-            width: calc(100% - 40px);
-            height: 30px;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-
-        #comment {
-            width: calc(100% - 40px);
-            height: 206px;
+        .comment-box textarea {
+            height: 200px;
+            resize: none;
             background-color: rgba(148, 163, 219, 0.55);
-            margin-bottom: 10px;
-            padding: 10px;
         }
 
-        input[type="submit"] {
-            width: calc(100% - 40px);
-            height: 47px;
+        .comment-box input[type="submit"] {
+            width: 101%;
+            height: 80px;
             background-color: #B0DAF2;
             border: none;
             color: white;
             font-size: 18px;
             cursor: pointer;
+            border-radius: 5px;
         }
-
-        input[type="submit"]:hover {
-            background-color: #8ABAD3;
-        }
+        
     </style>
 </head>
 <body>
@@ -72,24 +64,22 @@
                 <p style="color: red;">{{ msg }}</p>
                 {% csrf_token %}
                 <input type="text" name="name" id="name" placeholder="在此輸入名稱">
-                <textarea name="comment" id="comment" cols="30" rows="10" placeholder="在此輸入想說的話"></textarea>
+                <textarea name="comment" id="comment" placeholder="在此輸入想說的話"></textarea>
                 <input type="submit" value="確認">
             </form>
         </div>
     </div>
-    {% if comments %}
     <div class="comment-container">
-        <div class="comment-box">
-            <table>
+        {% if comments %}
             {% for c in comments %}
-                <tr>
-                    <td>{{ c.name }}</td>
-                    <td>{{ c.comment }}</td>
-                </tr>
+                <div class="comment-box">
+                    <div class="comment-entry">
+                        <div><p><strong>{{ c.name }} </strong></p></div>
+                        <div><p>{{ c.comment }}</p></div>
+                    </div>
+                </div>
             {% endfor %}
-            </table>
-        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </body>
 </html>
