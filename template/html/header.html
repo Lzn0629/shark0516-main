@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/CSS/reset.css" />
+    <link rel="stylesheet" href="/static/CSS/header.css" />
+  </head>
+  <body class="head">
+    {% load static %}
+    <nav class="menuhead">
+      <div class="twoside">
+        <div class="title">
+          <img class="imgShark" alt="shark" src="{% static 'img/shark.png' %}" />
+          <h1 class="resname">鯊死我餐廳系統</h1>
+        </div>
+
+        <div class="log">
+          {% if request.user.is_active %}
+            {{ request.user.first_name }}
+            <a href="/logout/" class="Options">登出</a>
+          {% else %}
+            <a href="/login/" class="Options">登入</a>
+            <a href="/register/" class="Options">註冊</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="Function">
+        <a href="/" class="Options">主頁</a>
+        <a href="/menuAll/" class="Options">菜單</a>
+        <a href="/comment/" class="Options">留言板</a>
+        {% if request.user.is_authenticated %}
+          {% if not request.user.is_superuser %}
+            <a href="/userModify/" class="Options">修改密碼</a>
+            <a href="/reserveAll/" class="Options">訂位紀錄</a>
+          {% else %}
+            <a href="/reserveAll/" class="Options">訂位資料</a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </nav>
+
+    <div class="footer-section image-right">
+      {% if not request.user.is_superuser and request.user.is_authenticated %}
+        <a href="/userReservation/">
+          <p
+            style="
+              color: white;
+              border: 3px solid white;
+              font-size: 20px;
+              font-weight: bold;
+              text-align: center;
+              padding: 40px 20px;
+              position: fixed;
+              bottom: 20px;
+              right: 10px;
+              background-color: #8599e1;
+              border-radius: 100px;
+              z-index: 5;
+            "
+          >
+            點我<br />
+            立即訂位
+          </p>
+        </a>
+      {% endif %}
+    </div>
+  </body>
+</html>

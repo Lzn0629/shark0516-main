@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>請先登入</title>
+    <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .alert-box {
+            width: 1127px;
+            height: 638px;
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 144px;
+            height: 64px;
+            background-color: #B0DAF2;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 64px;
+            border-radius: 15px;
+        }
+
+        .alert-text {
+            font-weight: bold;
+            font-size: 96px;
+            position: absolute;
+            top: 20%; /* 放置在顶部 */
+            width: 100%;
+            text-align: center;
+        }
+
+        .button-area {
+            position: absolute;
+            top: 50%; /* 移动到中间 */
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* 按钮间隔 */
+        }
+
+        .button {
+            width: 289px;
+            height: 82px;
+            background-color: #ABB8E8;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 82px;
+            text-decoration: none;
+            color: black;
+            border-radius: 15px;
+            transition: 0.3s; /* 增加视觉效果 */
+        }
+
+        .button:hover {
+            background-color: #8599E1; /* 鼠标悬停时改变颜色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="alert-box">
+            <a class="back-button" onclick="history.back();">返回</a>
+
+            <div class="alert-text">請先登入！</div>
+
+            <div class="button-area">
+                <a class="button" href="/register/">立即註冊</a>
+                <a class="button" href="/login/">立即登入</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

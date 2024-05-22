@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂位資訊</title>
+    <style>
+        .page-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .info-box {
+            width: 579px;
+            height: 694px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; 
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1; 
+        }
+
+        .success-image, .error-image {
+            width: 50px; 
+            height: auto;
+        }
+
+        .text-container {
+            flex: 2; 
+            text-align: center;
+        }
+
+        .success-text, .failure-text {
+            font-size: 40px;
+            margin-bottom: 10px; 
+        }
+
+        .user-name {
+            font-size: 20px;
+            color: #F0B212;
+            margin-bottom: 10px; 
+        }
+
+        .detail-text {
+            font-size: 24px;
+            margin-bottom: 10px; 
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around; 
+            padding-top: 20px; 
+        }
+
+        .button {
+            padding: 10px 20px; 
+            text-decoration: none;
+            color: white;
+            border-radius: 10px;
+            font-size: 24px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .button-home {
+            background-color: #8599E1; 
+        }
+
+        .button-reserve {
+            background-color: #D9D9D9; 
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="info-box">
+            {% if alternate %}
+                <div class="image-container">
+                    <img class="error-image" src="{% static 'img/no.png' %}" alt="Error Image">
+                </div>
+                <div class="text-container">
+                    <div class="failure-text">請至現場候補排隊</div>
+                    <div class="detail-text">目前預約人數已滿</div>
+                    <div class="detail-text">請至現場候補排隊~</div>
+                </div>
+                <div class="button-container">
+                    <a href="/" class="button button-home">返回主頁</a>
+                    <a href="/userReservation/" class="button button-reserve">再次訂位</a>
+                </div>
+            {% else %}
+                <div class="image-container">
+                    <img class="success-image" src="{% static 'img/suc.png' %}" alt="Success Image">
+                </div>
+                <div class="text-container">
+                    <div class="success-text">您已訂位成功</div>
+                    <div class="user-name">{{ request.user.first_name }}，您好</div>
+                    <div class="detail-text">以下是您的訂位訊息：</div>
+                    <p>日期：{{ date }}</p>
+                    <p>時段：{{ time }}</p>
+                    <p>備註：{{ note }}</p>
+                </div>
+                <div class="button-container">
+                    <a href="/" class="button button-home">返回主頁</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

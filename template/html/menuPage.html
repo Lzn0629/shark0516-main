@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shark</title>
+    <link rel="stylesheet" href="/static/CSS/reset.css" />
+    <link rel="stylesheet" href="/static/CSS/menuPage.css" />
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <div class="contact1">
+      <form class="form1" action="/menuSearch/" method="get">
+        <div></div>
+        <div></div>
+        {% csrf_token %}
+        <div>
+          <input class="input1" type="text" name="keyWord" />
+        <button class="btnSearch1" type="submit" value="搜尋">搜尋</button>
+        </div>
+      </form>
+
+      <div class="layout1">
+        <ul class="url1">
+          <li class="dishKindLi1">
+            <a class="dishKind1" href="/menuAll/">全部</a>
+          </li>
+          {% if classificationAll %} {% for c in classificationAll %}
+          <li class="dishKindLi1">
+            <a class="dishKind1" href="/menuByClassification/{{ c.id }}">{{ c.name }}</a>
+          </li>
+          {% endfor %} {% endif %}
+        </ul>
+
+        <div class="someMenu1">
+          {% if menuList %} {% for m in menuList %}
+          <div class="card1">
+            <img src="{{ m.image.url }}" alt="{{ m.name }}" width="300" height="200">
+            <p class="dishName1"><a href="/menu/{{ m.id }}">{{ m.name }}</a></p>
+            <p class="dishPrice1">$ {{ m.price }}</p>
+          </div>
+          {% endfor %} {% else %}
+          <p>無</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

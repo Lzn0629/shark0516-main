@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂位紀錄</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menuhead a {
+            color: white;
+            text-decoration: none;
+            padding: 0 20px;
+            font-weight: bold;
+        }
+
+        .menuhead img {
+            vertical-align: middle;
+        }
+
+        .page-container {
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start; 
+            margin-top: 180px; 
+        }
+
+        .reservation-box {
+            width: 90%; 
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow: auto; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; 
+        }
+        th, td {
+            font-size: 1.2em; 
+            padding-bottom: 1em; 
+        }
+
+        th:nth-child(1), td:nth-child(1) {
+            font-size: 1.5em; 
+            padding-top: 1em
+        }
+
+        th:nth-child(2), td:nth-child(2) {
+            font-size: 1.5em; 
+        }
+
+        th:nth-child(3), td:nth-child(3) {
+            font-size: 1.5em; 
+        }
+
+        th:nth-child(4), td:nth-child(4) {
+            font-size: 1.5em; 
+        }
+
+        th:nth-child(5), td:nth-child(5) {
+            font-size: 1.5em; 
+        }
+                   
+        th {
+            background-color: #ABB8E8; 
+            color: white;
+            height: 50px;
+        }
+        
+
+        td:nth-child(2) {
+            font-weight: bold;
+            font-size:25px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding-top: 30px;
+        }
+
+        .pagination a:hover {
+            background-color: #8599E1; 
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="page-container"> 
+        <div class="reservation-box"> 
+            <table>
+                <thead>
+                    <tr>
+                        <th>訂位日期</th>
+                        <th>訂位時段</th>
+                        <th>訂位人數</th>
+                        <th>備註</th>
+                        <th>訂位狀態</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if reserve %}
+                        {% for r in reserve %}
+                        <tr>
+                            <td>{{ r.date }}</td>
+                            <td>{{ r.time }}</td>
+                            <td>{{ r.numberOfPeople }}</td>
+                            <td>{{ r.note }}</td>
+                            <td>已到</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="5">沒有紀錄</td> 
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div> 
+    </div>
+</body>
+</html>

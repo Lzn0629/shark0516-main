@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>餐廳訂位</title>
+    <style>
+        
+        .page-container {
+            height: 100vh;  
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+
+        .reservation-box {
+            background-color: white;
+            padding: 30px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .date-button, .time-button {
+            background-color: #D9D9D9;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .number-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .number-control {
+            width: 52px;
+            height: 52px;
+            background-color: #D9D9D9;
+            border: none;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .number-display {
+            width: 122px;
+            height: 52px;
+            background-color: #D9D9D9;
+            text-align: center;
+            font-size: 24px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .textarea {
+            background-color: #D9D9D9;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+            height: 78px;
+            padding: 10px;
+        }
+
+        .submit-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .submit-button {
+            width: 184px;
+            height: 66px;
+            background-color: #ABB8E8;
+            border: none;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+{% include 'header.html' %}
+<body>
+    <div class="page-container">
+        <div class="reservation-box">
+            {% if msg %}
+            <div>{{ msg }}</div>
+            {% endif %}
+
+            <form action="/userReservation/" method="post">
+                {% csrf_token %}
+
+                <div class="section-title">訂位日期:</div>
+                <div class="button-group">
+                    {% for date in dateList %}
+                    <label class="date-button">
+                        <input type="radio" name="date" value="{{ date }}">
+                        {{ date }}
+                    </label>
+                    {% endfor %}
+                </div>
+
+                <div class="section-title">訂位時段:</div>
+                <div class="button-group">
+                    {% for time in timeList %}
+                    <label class="time-button">
+                        <input type="radio" name="time" value="{{ time.id }}">
+                        {{ time.name }}
+                    </label>
+                    {% endfor %}
+                </div>
+
+                <div class="section-title">訂位人數:</div>
+                <div class="number-input">
+                    <input type="number" name="numberOfPeople" min="1" value="1" class="number-display">
+                </div>
+
+                <div class="section-title">備註:</div>
+                <textarea name="note" class="textarea" placeholder="輸入您的備註..."></textarea>
+                <d>*訂位不得取消  請再次確認您的資料無誤</d>
+                <div class="submit-group">
+                    <button type="button" class="submit-button" onclick="history.back();">取消</button>
+                    <button type="submit" class="submit-button">確認</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

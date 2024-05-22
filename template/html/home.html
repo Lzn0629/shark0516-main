@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Surf Shark</title>
+</head>
+
+{% extends 'base.html' %}
+<body>
+    {% block content %}
+    <h1>這是我們的新品喔~</h1>
+    {% include 'menu.html' %}
+    <div class="additional-content">
+        <h2>為您推薦</h2>
+        <p>Stay tuned for our latest updates and promotions!</p>
+    </div>
+{% endblock %}
+</body>
+
+<body>
+    {% if recommendation %}
+        {% for r in recommendation %}
+        <td><a href="/menu/{{ r.id }}">{{ r.name }}</a></td>
+        {% endfor %}
+    {% endif %}
+</body>
+
+</html>

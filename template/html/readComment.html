@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        {% for c in comments %}
+        <tr>
+            <td>{{ c.name }}</td>
+            <td>{{ c.comment }}</td>
+            <td>{{ c.uploadTime }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

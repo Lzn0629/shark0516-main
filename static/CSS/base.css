@@ -1,0 +1,27 @@
+.contact{
+  margin-top: 200px;
+}
+
+.cardrecommend {
+  margin-bottom: 100px;
+}
+
+.contact h2 {
+  font-size: 60px;
+  margin-left: 50px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  justify-items: center;
+  align-items: center;
+}
+
+.imgage {
+  /* 顏色要改 */
+  background-color: rgb(66, 106, 143);
+  padding: 180px 350px;
+  margin: 40px;
+}

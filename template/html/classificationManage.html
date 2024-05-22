@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if msg %}
+    {{ msg }}
+    {% endif %}
+    <table>
+    {% for c in classifications %}
+    <tr>
+        <td><a href="/classificationModify/{{ c.id }}">{{ c.name }}</a></td>
+        <td><a href="/classificationDelete/{{ c.id }}" onclick="alert('是否確定要刪除{{ c.name }}')">delete</a></td>   
+    </tr>
+    {% endfor %}   
+    </table>
+    <a href="/classificationAdd">add</a>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>註冊</title>
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            width: 100%;
+            height: 84px;
+            background-color: #8599E1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .login-box {
+            width: 579px;
+            height: 850px;
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .field {
+            font-size: 32px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .input-box {
+            width: 400px;
+            height: 45px;
+            background-color: #D9D9D9;
+            border: 2px solid #aaa;
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 24px;
+        }
+
+        .confirm-button {
+            width: 580px;
+            height: 57px;
+            background-color: #B0DAF2;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+            margin-top: 50px;
+            border-color:#B0DAF2;
+        }
+
+        .register-link {
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="header">
+                <h1 style="color: white;">註冊</h1>
+            </div>
+
+            <div>
+                <form action="/register/" method="post">
+                    {% csrf_token %}
+                    <h3 style="color: red;">{{ msg }}</h3>
+                    <div class="field">
+                        <label for="username">帳號：</label>
+                        <input type="text" name="username" class="input-box" id="username" placeholder="請輸入手機號">
+                    </div>
+
+                    <div class="field">
+                        <label for="password">密碼：</label>
+                        <input type="password" name="password" class="input-box" id="password" placeholder="請輸入密碼">
+                    </div>
+
+                    <div class="field" style="font-size: 20px;">
+                        <label for="password2">密碼確認：</label>
+                        <input type="password" name="password2" class="input-box" id="password2">
+                    </div>
+
+                    <div class="field">
+                        <label for="email">郵件：</label>
+                        <input type="email" name="email" class="input-box" id="email">
+                    </div>
+
+                    <div class="field">
+                        <label for="first_name">姓名：</label> 
+                        <input type="text" name="first_name" class="input-box" id="first_name">
+                    </div>
+
+                    <div class="field">
+                        <label for="sex">性別：</label>
+                        <select name="sex" class="input-box" style="font-size: 16px" id="sex">  
+                            {% for sex in sexList %}  
+                                <option value="{{ sex.id }}">{{ sex.name }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <input type="submit" value="確認" class="confirm-button">
+
+                    <div class="register-link">
+                        已經有帳號嗎？<a href="/login/">立即登入</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

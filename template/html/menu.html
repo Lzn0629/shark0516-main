@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/CSS/reset.css" />
+    <link rel="stylesheet" href="/static/CSS/menu.css" />
+    <title>Shark</title>
+    <style>
+      
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+      }
+
+      .acard1 {
+          width: 70%;
+          margin: 20px auto;
+          padding: 20px;
+          background-color: rgba(255, 255, 255, 0.85);
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: relative;
+          background-image: url('/path/to/your/background-image.jpg');
+          background-size: cover;
+          background-repeat: no-repeat;
+          margin-top: 200px; 
+      }
+
+      .btnBack1 {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #B0DAF2;
+          color: #000;
+          text-decoration: none;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          position: absolute;
+          top: 20px;
+          left: 20px;
+      }
+
+      .btnBack1:hover {
+          background-color: #8ABAD3;
+      }
+
+      .things1 {
+          background-color: rgba(173, 189, 232, 0.85);
+          padding: 20px;
+          border-radius: 10px;
+          margin-top: 60px;
+      }
+
+      .menu-dishname1 {
+          font-size: 36px;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 10px;
+      }
+
+      .menu-dishprice1 {
+          font-size: 24px;
+          color: #555;
+          margin-bottom: 10px;
+      }
+
+      .menu-dishclassification1,
+      .menu-dishIngredients1,
+      .menu-introduction {
+          font-size: 18px;
+          color: #555;
+          margin-bottom: 10px;
+      }
+
+      .menu-dishIngredients1 {
+          font-size: 20px;
+          font-weight: bold;
+      }
+
+      p {
+          margin: 10px 0;
+          color: #555;
+          font-size: 18px;
+      }
+
+      .recommenddish {
+          display: block;
+          font-size: 18px;
+          color: #8599E1;
+          text-decoration: none;
+          margin: 10px 0;
+      }
+
+      .recommenddish:hover {
+          text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <div class="acard1">
+      <a class="btnBack1" onclick="history.back();">返回</a>
+      <div class="things1">
+        <img src="{{ menu.image.url }}" alt="{{ m.name }}" width="300" height="400">
+        <div>
+          <h1 class="menu-dishname1">{{ menu.name }}</h1>
+          <p class="menu-dishprice1">{{ menu.price }}</p>
+          <p class="menu-dishclassification1">{{ menu.classification }}</p>
+          <p class="menu-dishIngredients1">{{ menu.allergy }}</p>
+          <p class="menu-introduction">{{ menu.introduce }}</p>
+        </div>
+      </div>
+      <p>{{ menu.isVegetarian }}</p>
+    </div>
+    <div>
+      {% if recommendation %}
+      <ul>
+        {% for r in recommendation %}
+        <li>
+          <a href="/menu/{{ r.id }}" class="recommenddish">{{ r.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shark</title>
+    <link rel="stylesheet" href="/static/CSS/reset.css" />
+    <link rel="stylesheet" href="/static/CSS/menuManage.css" />
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+    <div class="contact2">
+      <form class="form2" action="/menuSearch/" method="get">
+        <div>
+          <a class="addnew" href="/menuAdd/">新增 +</a>
+        </div>
+        <div class="sall2">
+          <a href="/menuAll/">全部商品</a>
+          <!-- <a onclick="testOn()">已上架商品</a>
+          <a onclick="testOff()">已下架商品</a> -->
+          <a href="/menuAll/?state=on">已上架商品</a>
+          <a href="/menuAll/?state=off">已下架商品</a>
+        </div>
+        <div class="search10">
+          {% csrf_token %}
+          <input
+            class="input2"
+            type="text"
+            name="keyWord"
+            placeholder="搜索..."
+          />
+          <button class="btnSearch2" type="submit" value="搜尋">搜尋</button>
+        </div>
+      </form>
+
+      <div class="layout2">
+        <ul class="ul2">
+          <li class="dishKindLi2">
+            <a class="dishKind2" href="/menuAll/">全部</a>
+          </li>
+          {% if classificationAll %} {% for c in classificationAll %}
+          <li class="dishKindLi2">
+            <a class="dishKind2" href="/menuByClassification/{{ c.id }}"
+              >{{ c.name }}</a
+            >
+          </li>
+          {% endfor %} {% endif %}
+        </ul>
+
+        <div class="someMenu2">
+          {% if menuList %} {% for m in menuList %}
+          <div class="card2">
+            <a class="editmenu" href="/menu/{{ m.id }}">編輯</a>
+            <img class="Genshin2" src="/static/img/原神_國際版.jpeg" alt="" />
+            <div>
+              <p class="object2 dishName2" href="/menu/{{ m.id }}">
+                {{ m.name }}
+              </p>
+              <p class="object2 dishprice2">$ {{ m.price }}</p>
+            </div>
+            <div class="deviedClsVeg">
+              <p class="object2 dishclassification">{{ m.classification }}</p>
+              <p class="object2 dishisVegetarian">{{ m.isVegetarian }}</p>
+            </div>
+            <p class="object2 dishallergy">{{ m.allergy }}</p>
+            {% if kw %}
+            <div class="deviedDelSal">
+              <a
+                class="contromenu delete2"
+                href="/menuDelete/{{ m.id }}/{{ kw }}"
+                >刪除</a
+              >
+              <a class="contromenu" href="/menuSaleChange/{{ m.id }}/{{ kw }}">
+                {% if m.isSale %} 下架 {% else %} 上架 {% endif %}
+              </a>
+            </div>
+            {% elif classification_id %}
+            <div class="deviedDelSal">
+              <a
+                class="contromenu delete2"
+                href="/menuDelete/{{ m.id }}/{{ classification_id }}"
+                >刪除</a
+              >
+              <a
+                class="contromenu"
+                href="/menuSaleChange/{{ m.id }}/{{ classification_id }}"
+              >
+                {% if m.isSale %} 下架 {% else %} 上架 {% endif %}
+              </a>
+            </div>
+            {% else %}
+            <div class="deviedDelSal">
+              <a class="contromenu delete2" href="/menuDelete/{{ m.id }}"
+                >刪除</a
+              >
+              <a class="contromenu" href="/menuSaleChange/{{ m.id }}">
+                {% if m.isSale %} 下架 {% else %} 上架 {% endif %}
+              </a>
+            </div>
+
+            {% endif %}
+          </div>
+          {%endfor %} {% else %}
+          <p>無</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- <script>
+  function testOn() {
+    var currentUrl = window.location.href;
+    if (currentUrl.includes("?state=on")) {
+      location.reload();
+    } else {
+      window.location.href = currentUrl + "?state=on";
+    }
+  }
+  function testOff() {
+    var currentUrl = window.location.href;
+    if (currentUrl.includes("?state=on")) {
+      location.reload();
+      
+    } else {
+      window.location.href = currentUrl + "?state=off";
+    }
+  }
+</script> -->

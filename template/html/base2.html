@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shark</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="max-width, initial-scale=1">
+<link rel="stylesheet" href="/static/CSS/reset.css">
+<link rel="stylesheet" href="/static/CSS/base.css">
+</head>
+<body>
+<!-- Header -->
+</header>
+<!-- Page content -->
+{% include 'header.html' %}
+        
+<div class="w3-content w3-padding" style="max-width:1564px">
+    <div class="card">
+        <div class="card-body">
+            <div class="list-group" style="font-size: 2px;">
+            </div>
+        </div>
+    </div>
+{% block headmessage %} 
+{% endblock %}
+  <!-- Project Section -->
+
+  <div class="card">
+    <div class="card-header">
+        <h2>這是我們的新品喔~<h2>
+    </div>
+    <div class="list-group" style="font-size: 21px; display:flex; list-style:none;">
+        {% for category in categories %}    
+        <a>|</a><li style="padding:0 25px 0 40px" > <a href="/category/{{ category.id }}/">{{ category.name }}  <li style="padding:0 25px 0 25px" >|</a></li>  
+        {% endfor %}
+    </div>
+</div>
+  <div class="w3-container w3-padding-32" id="projects">
+    <h2 class="w3-border-bottom w3-border-light-grey w3-padding-16">書籍</h2>
+  </div>
+  <div class="col-sm-9 col-md-9">
+    <div class="card">
+        <div class="card-body">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <div class="w3-row-padding">
+      <div class="w3-row-padding">
+        <div class="w3-container w3-padding-32" id="money">
+            <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">贊助商</h3>
+        <div class="w3-col l4 m4 s12 w3-margin-bottom">
+            <div class="w3-display-container">
+                <a href="https://www.eslite.com/" target="_blank"> 
+                    <div class="w3-display-topleft w3-black w3-padding">誠品書局</div>
+                    <img src="https://www.eslite.com/eslite-og-logo.png" alt="誠品書局" style="width:60%;">
+                </a>
+            </div>
+        </div>
+    </div>
+      </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="w3-container w3-padding-32" id="about">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">關於</h3>
+    <p>圖書館是知識的殿堂，是人們尋求智慧和資訊的聖地。它們是社會中心，為讀者提供無限的可能性和探索的機會。圖書館扮演著重要的角色，既保存著過去的知識，又為未來的創新鋪平了道路。
+我們的圖書館是一個開放的空間，歡迎各個年齡層的讀者。這裡有數以萬計的書籍，從經典文學到最新的科學研究，應有盡有。無論您是學生、研究人員還是只是對知識充滿好奇心的人，這裡都是您的理想去處。
+除了書籍，我們的圖書館也提供現代化的資源，包括電子書、數據庫、多媒體資料和互聯網接入，以確保您可以輕鬆訪問所需的信息。我們還舉辦各種文化和教育活動，例如講座、展覽和讀書俱樂部，以促進學習和交流。
+圖書館是一個社區的精神家園，它們將人們聚集在一起，鼓勵對知識的追求。不論您是正在尋找答案、探索世界還是只是想度過安靜的時光，我們的圖書館總是為您敞開大門。歡迎您來體驗這個知識的寶庫，並成為我們社區的一部分。
+    </p>
+  </div>
+  <div class="w3-container w3-padding-32" id="more">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">詳細功能</h3>
+  <br>
+  {% if request.user.is_active %}
+  <div class="card">
+      <div class="card-body">
+          <div class="list-group" style="font-size: 21px;">
+            <p>管理員功能</p>
+              <li><a href="/borrowList/">借閱列表</a></li>
+              <li><a href="/needReturn/">即將到期圖書</a></li>
+          </div>
+      </div>
+  </div>
+  <br>
+  {% endif %}
+  {% if request.user.is_staff %}
+  <div class="card">
+      <div class="card-body">
+          <div class="list-group" style="font-size: 21px;">
+            <p>圖書管理員功能</p>
+              <li><a href="/bookManagePage/">書籍管理</a></li>
+              <li><a href="/returnBookPage/">還書處理</a></li>
+              {% if request.user.is_superuser %}
+              <li><a href="/librarianManage/">圖書館會員</a></li>
+              {% endif %}
+          </div>
+      </div>
+  </div>
+  <br>
+  {% endif %}
+  </div>
+</body>
+{% include 'footer.html' %}
+</html>
